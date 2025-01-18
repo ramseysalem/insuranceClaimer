@@ -41,6 +41,14 @@ const LoginPage = () => {
     }
   }
 
+  // New function added
+  const handleOAuthSignIn = () => {
+    let supabase;
+    supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
+  };
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string()
@@ -80,7 +88,7 @@ const LoginPage = () => {
             <form onSubmit={handleLogin}>
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-4">
-                  <GoogleButton />
+                  <GoogleButton onClick={handleOAuthSignIn} />
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
